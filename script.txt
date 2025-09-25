@@ -1,0 +1,124 @@
+const dateInput = document.querySelector('.date-input');
+const cityInput = document.querySelector('.city-input');
+const weightInput = document.querySelector('.weight-input');
+const addCargoButton = document.querySelector('.addCargo-button');
+const cargoList = document.querySelector('.cargo-list');
+let id = 0;
+const taskInput = document.querySelector('.task-input');
+const addTaskButton = document.querySelector('.addTask-button');
+const taskList = document.querySelector('.task-list');
+
+if (localStorage.getItem('tasks')) {
+    taskList.innerHTML = localStorage.getItem('tasks');
+}
+if (localStorage.getItem('cargos')) {
+    cargoList.innerHTML = localStorage.getItem('cargos');
+}
+if (localStorage.getItem('inputId')){
+  id = localStorage.getItem('inputId') || 0;
+}
+
+addCargoButton.addEventListener('click', addCargoItem);
+addTaskButton.addEventListener('click', addTaskAction);
+taskInput.addEventListener('keydown', addTaskAction);
+
+cargoList.addEventListener('keyup', e => {
+  if(e.target.classList.contains('cargo-item_tc')){
+    const liItem = e.target.closest('li')
+    const input = liItem.children[3]
+    input.setAttribute('value', e.target.value)
+  }
+  localStorage.setItem('tasks', cargoList.innerHTML);
+})
+
+cargoList.addEventListener('click', e => {
+  if (e.target.classList.contains('cargo-item_done')){
+    const listItem = event.target.closest('li');
+    listItem.parentNode.removeChild(listItem);
+
+    localStorage.setItem('cargos', cargoList.innerHTML);
+  }
+});
+
+taskList.addEventListener('click', event => {
+    if (event.target.classList.contains('delete-button')) {
+        const listItem = event.target.closest('li');
+      listItem.classList.add('li-out');
+      setTimeout(() => {
+        listItem.parentNode.removeChild(listItem);
+        localStorage.setItem('tasks', taskList.innerHTML);
+                 }, 500);
+    }
+
+    if (event.target.classList.contains('change-button')) {
+      const listItem = event.target.closest('li');
+      const listElementsOfListItem = listItem.children;
+      
+
+      for(const element of listElementsOfListItem) {
+        if(element.classList.contains('task-description')) {
+          const newDescription = prompt('Введите новое сожержание задачи', element.textContent);
+          element.textContent = newDescription;
+        }
+      }
+      localStorage.setItem('tasks', taskList.innerHTML);
+    }
+});
+
+function addCargoItem (event) {
+   const newCargo = {
+          date: dateInput.value,
+          city: cityInput.value,
+          weight: weightInput.value,
+          t_c:''
+          }
+     
+    if (newCargo.date !== "" && newCargo.city !== "" && newCargo.weight !== "") {
+        const cargoListItem = document.createElement('li');
+        cargoListItem.classList.add('cargo-item');
+        cargoListItem.classList.add('container');
+        cargoListItem.classList.add('list-group-item');
+        cargoListItem.classList.add('d-flex');
+        cargoListItem.classList.add('justify-content-between');
+        cargoListItem.innerHTML = `
+            <div class="cargo-item_date" style="min-width: 60px">${newCargo.date}</div>
+            <div class="cargo-item_city" style="min-width: 60px">${newCargo.city}</div>
+            <div class="cargo-item_weight" style="min-width: 30px">${newCargo.weight} тн</div>
+            <input id="${id++}" type='text' class="cargo-item_tc" style="max-width: 100px" value="${newCargo.t_c}"/>
+            <input class="cargo-item_done" type='checkbox' style="cursor:pointer"/>
+            `;
+        cargoList.appendChild(cargoListItem);
+
+        dateInput.value = '';
+        cityInput.value = '';
+        weightInput.value = '';
+
+        localStorage.setItem('cargos', cargoList.innerHTML);
+        localStorage.setItem('inputId', id);
+    }
+}
+
+function addTaskAction (event) {
+  if (event.type === "click" || (event.type === "keydown" && event.key === "Enter")) {
+  const taskDescription = taskInput.value;
+    if (taskDescription !== '') {
+        const taskListItem = document.createElement('li');
+        taskListItem.classList.add('task-item');
+        taskListItem.classList.add('list-group-item');
+        taskListItem.classList.add('d-flex');
+        taskListItem.classList.add('justify-content-between');
+        taskListItem.innerHTML = `
+            <span class="task-description">${taskDescription}</span>
+            <div class="btns-container align-items-center">
+            <button class ="change-button btn btn-info" style="max-height: 36px"><img alt="edit icon" href="./assets/edit.svg"/></button>
+            <button class ="delete-button btn btn-danger" style="max-height: 36px">Удалить</button>
+            </div>
+            `;
+        taskList.appendChild(taskListItem);
+
+        taskInput.value = '';
+
+        localStorage.setItem('tasks', taskList.innerHTML);
+    }
+  }
+};

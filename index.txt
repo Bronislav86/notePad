@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Органайзер</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="data:image/svg+xml, 
+	<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M4 4c4.457 -0.214 7.327 -0.099 11.333 2 1.8 -0.431 1.8 -0.431 3.333 -1.333 2.101 -0.699 3.592 -0.734 5.792 -0.707l2.007 0.018L28 4v3.333h3.333V26c-5.125 0.583 -5.125 0.583 -6.72 0.757 -2.646 0.317 -4.811 0.863 -7.28 1.91 -2.25 -0.2 -4.277 -0.742 -6.458 -1.333 -3.582 -0.899 -3.582 -0.899 -10.208 -1.334V7.333H4zM2.667 8.667c-0.827 0.677 -0.827 0.677 -0.743 2.089l0.011 1.851 0.007 1.999 0.017 2.103 0.009 2.111q0.01 2.589 0.031 5.179l2.07 0.269 2.721 0.357 1.361 0.176c2.415 0.318 4.8 0.686 7.181 1.199 -1.723 -2.191 -3.347 -2.409 -6.041 -2.791l-2.149 -0.321c-1.726 -0.248 -1.726 -0.248 -3.143 -0.221V8.667zm25.333 0v14l-3.417 0.209c-3.135 0.274 -5.257 0.805 -7.917 2.457 1.451 0.907 1.451 0.907 3.667 0.083 2.999 -0.749 2.999 -0.749 9.666 -1.416V9.333z" fill="#E69B6A"/><path d="M4 4c7.333 0 7.333 0 11.333 2v19.333L11.333 24a44.571 44.571 0 0 0 -3.167 -0.375c-2.698 -0.225 -2.698 -0.225 -4.166 -0.958z" fill="#FCA56C"/><path d="M0.667 7.333h4v1.333l-2 0.667L2 24h6.667c2.167 0.509 2.167 0.509 4 1.125 3.467 0.957 5.553 0.809 8.839 -0.617C23.333 24 23.333 24 30 24l-0.667 -14.667 -2 -0.667V7.333h4V26c-5.125 0.583 -5.125 0.583 -6.72 0.757 -2.646 0.317 -4.811 0.863 -7.28 1.91 -2.25 -0.2 -4.277 -0.742 -6.458 -1.333 -3.582 -0.899 -3.582 -0.899 -10.208 -1.334z" fill="#324560"/></svg>
+	">
+  </head>
+<body class="container d-flex">
+	<div class="cargo" style="min-width:700px">
+	  <h1 class="text-center fp-1 fw-bolder my-5 text-white bg-secondary border-warning-subtle rounded-3 pb-2 pt-1 shadow">Актуальные грузы</h1>
+		<div class="inputs container d-flex ps-0">
+		  <input type="text" class="date-input form-control my-4 me-2 shadow-sm" style="max-width:100px" placeholder="Дата:">
+      <input type="text" class="city-input form-control my-4 me-2 shadow-sm" style="max-width:150px" placeholder="Город">
+      <input type="text" class="weight-input form-control my-4 me-2 shadow-sm" style="max-width:150px" placeholder="Вес">
+		</div>
+		<button class="addCargo-button btn btn-warning my-4 text-white fw-bolder shadow">Добавить</button>
+	<ul class="cargo-list list-group shadow-sm" style='min-width:700px; padding:10px 20px 10px 20px'>
+	</ul>
+	</div>
+  <div class="tasks container" style="max-width:500px">
+    <h1 class="text-center fp-1 fw-bolder my-5 text-white bg-dark border-warning-subtle rounded-3  pb-2 pt-1 shadow">Список дел</h1>
+		<input type="text" class="task-input form-control my-4 shadow-sm" placeholder="Добавить задачу">
+		<button class="addTask-button btn btn-warning my-4 text-white fw-bolder shadow">Добавить</button>
+	<ul class="task-list list-group shadow-sm"></ul>
+  </div>
+</body>
+<script src="./script.js"></script>
+</html>
